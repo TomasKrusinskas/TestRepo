@@ -1,5 +1,0 @@
-if(EXISTS "C:/Users/Tomas/Desktop/c++/CalculatorV2/out/build/Visual Studio Community 2022 Release - amd64_x86/calculatorv2_tests[1]_tests.cmake")
-  include("C:/Users/Tomas/Desktop/c++/CalculatorV2/out/build/Visual Studio Community 2022 Release - amd64_x86/calculatorv2_tests[1]_tests.cmake")
-else()
-  add_test(calculatorv2_tests_NOT_BUILT calculatorv2_tests_NOT_BUILT)
-endif()
