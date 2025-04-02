@@ -1,0 +1,10 @@
+^C:\USERS\TOMAS\DESKTOP\C++\CALCULATORV2\BUILD\CMAKEFILES\9D619707A1BAFE102BF736509ECB6BFE\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/Tomas/Desktop/c++/CalculatorV2 -BC:/Users/Tomas/Desktop/c++/CalculatorV2/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/Tomas/Desktop/c++/CalculatorV2/build/calculatorv2.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
