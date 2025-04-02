@@ -1,0 +1,38 @@
+To instruct GCC to optimize for minimal binary size (using the -Os flag) when building your executable, you can add the flag in your CMake configuration. Here are a few approaches:
+
+1. Globally for Release Builds
+You can set the default release flags in your CMakeLists.txt so that all targets built in release mode use -Os:
+
+cmake
+Copy
+set(CMAKE_C_FLAGS_RELEASE "-Os")
+set(CMAKE_CXX_FLAGS_RELEASE "-Os")
+Place these lines before you define your targets (typically near the top of your CMakeLists.txt).
+
+2. Target-Specific Compiler Options
+Alternatively, if you only want to change the optimization for a specific target (for example, your calculatorv2 executable), you can add target-specific compile options:
+
+cmake
+Copy
+target_compile_options(calculatorv2 PRIVATE $<$<CONFIG:Release>:-Os>)
+This adds the -Os flag only when building in Release configuration for the calculatorv2 target.
+
+Repeat the same for other targets if needed (e.g., your test executable):
+
+cmake
+Copy
+target_compile_options(calculatorv2_tests PRIVATE $<$<CONFIG:Release>:-Os>)
+Summary
+Global Setting:
+
+cmake
+Copy
+set(CMAKE_C_FLAGS_RELEASE "-Os")
+set(CMAKE_CXX_FLAGS_RELEASE "-Os")
+Target-Specific Setting:
+
+cmake
+Copy
+target_compile_options(calculatorv2 PRIVATE $<$<CONFIG:Release>:-Os>)
+target_compile_options(calculatorv2_tests PRIVATE $<$<CONFIG:Release>:-Os>)
+Choose the approach that best fits your project needs. These adjustments will instruct GCC to optimize for minimal binary size using the -Os flag during a release build.

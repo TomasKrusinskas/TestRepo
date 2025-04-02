@@ -1,0 +1,32 @@
+Here's a step-by-step guide to compile and run a simple "Hello, World!" program using GCC on WSL:
+
+Create the Source File:
+Open your favorite editor in WSL and create a file named hello.c with the following content:
+
+c
+Copy
+#include <stdio.h>
+
+int main() {
+    printf("Hello, World!\n");
+    return 0;
+}
+Compile the Program:
+In your WSL terminal, navigate to the directory where hello.c is located and run:
+
+bash
+Copy
+gcc hello.c -o hello
+This command tells GCC to compile hello.c and output an executable named hello.
+
+Run the Executable:
+Execute the program with:
+
+bash
+Copy
+./hello
+You should see the output:
+
+Copy
+Hello, World!
+That's it! You've successfully compiled and run a "Hello, World!" program on WSL using GCC.

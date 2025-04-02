@@ -1,0 +1,69 @@
+Below are two different approaches for adding Boost.Regex to your project.
+
+a) Adding Boost.Regex “as part of the project”
+This method assumes you’ve downloaded (or added via a submodule) the Boost libraries into your repository. For example, you might place the Boost source in a folder called third_party/boost.
+
+Steps
+Download Boost or Boost.Regex:
+– Download the full Boost release (or just the Boost.Regex component) and extract it into a folder (for example, third_party/boost).
+
+Update Your CMakeLists.txt:
+Add the following lines to your CMakeLists.txt to use your local copy of Boost. Adjust the paths as needed:
+
+cmake
+Copy
+# Set the path to your local Boost installation
+set(BOOST_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/third_party/boost")
+set(Boost_NO_SYSTEM_PATHS ON)
+
+# Find the Boost.Regex library. Adjust REQUIRED components as needed.
+find_package(Boost REQUIRED COMPONENTS regex)
+if(Boost_FOUND)
+    message(STATUS "Found Boost version ${Boost_VERSION}")
+    include_directories(${Boost_INCLUDE_DIRS})
+else()
+    message(FATAL_ERROR "Boost not found!")
+endif()
+
+# Link your executable with Boost.Regex
+target_link_libraries(calculatorv2 PRIVATE ${Boost_LIBRARIES})
+# And for tests if needed:
+target_link_libraries(calculatorv2_tests PRIVATE ${Boost_LIBRARIES})
+This configuration tells CMake to look for Boost in your local third_party/boost directory rather than in system paths.
+
+b) Adding Boost.Regex as an External Dependency from GitHub
+You can use CMake’s FetchContent module to automatically download and build Boost.Regex from its GitHub repository. Note that Boost’s libraries have become more CMake‐friendly in recent releases.
+
+Steps
+Use FetchContent in Your CMakeLists.txt:
+Add the following block before you define your targets (or in an appropriate section):
+
+cmake
+Copy
+include(FetchContent)
+
+FetchContent_Declare(
+    boost_regex
+    GIT_REPOSITORY https://github.com/boostorg/regex.git
+    GIT_TAG boost-1.80.0  # Use the appropriate tag for your version
+)
+
+# Download and configure Boost.Regex
+FetchContent_MakeAvailable(boost_regex)
+Link the Library to Your Targets:
+Once Boost.Regex is available, link it to your executables. For example:
+
+cmake
+Copy
+target_link_libraries(calculatorv2 PRIVATE boost_regex)
+target_link_libraries(calculatorv2_tests PRIVATE boost_regex)
+Depending on how Boost.Regex’s CMake files are set up in the repository, you might need to adjust the target name (for example, it might be called Boost::regex instead of boost_regex). Consult the repository documentation if needed.
+
+Summary
+Local Integration (a):
+– Download and store Boost (or just the Regex component) in a local folder (e.g., third_party/boost), and point CMake to that location with BOOST_ROOT and find_package(Boost REQUIRED COMPONENTS regex).
+
+External Dependency (b):
+– Use CMake’s FetchContent module to download Boost.Regex directly from GitHub, then link the resulting target (e.g., boost_regex or Boost::regex) to your application.
+
+Choose the approach that best fits your workflow. The first method makes your project self-contained, while the second keeps your repository lean by downloading the dependency on configuration time.

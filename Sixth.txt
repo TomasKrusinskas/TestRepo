@@ -1,0 +1,89 @@
+Below is an outline of how you can use Ghidra to decompile and compare binaries compiled with MSVC and GCC:
+
+1. Prepare Your Binaries
+MSVC Binary:
+Compile your application with MSVC (using the /MAP option if desired to generate a map file). Ensure you have a release build (or comparable optimization level).
+
+GCC Binary:
+Compile your application with GCC (using -Wl,-Map,output.map if needed) with similar optimization settings (for example, -Os for size optimization).
+
+Make sure both binaries are built from the same source to make the comparison meaningful.
+
+2. Create a New Ghidra Project
+Launch Ghidra:
+Open Ghidra and create a new non-shared project.
+
+Import Binaries:
+
+Import the MSVC-compiled binary (e.g., calculatorv2.exe) into the project.
+
+Then import the GCC-compiled binary (e.g., calculatorv2.exe built with GCC).
+
+Run Analysis:
+For each imported binary, allow Ghidra’s auto-analysis to complete. Accept default options or adjust them if you have specific requirements (e.g., for symbol recovery or data flow analysis).
+
+3. Decompile and Inspect
+Open the Decompiler Window:
+
+For each binary, navigate to a function of interest (for instance, main or any other function).
+
+Open the Decompiler window (Window > Decompiler) to view the pseudo-C code.
+
+Examine the Decompiled Code:
+
+Note differences in variable naming, control flow, and how compiler-specific constructs are handled.
+
+MSVC decompilation might show different patterns in calling conventions or inline functions compared to GCC.
+
+Take Notes:
+
+For example, GCC might generate more inlined code, or have a different representation of loops and conditionals.
+
+MSVC output may include additional runtime checks or different optimizations.
+
+4. Compare the Output
+Side-by-Side Comparison:
+You can open two instances of Ghidra’s CodeBrowser (or use a split-screen arrangement) to compare the decompiled output of the same function from each binary.
+
+Focus on Key Differences:
+
+Control Flow: Check if loops, conditionals, and function calls are structured differently.
+
+Variable Naming: While decompiled variable names are generated, differences in naming might indicate how each compiler handled symbols.
+
+Optimizations: Look for differences in inlining, unrolling, and how dead code is removed.
+
+Function Prologues/Epilogues: Compiler-specific conventions often lead to differences in the setup and teardown code.
+
+Document Observations:
+Write down the key differences, such as how MSVC and GCC each optimize or handle certain constructs.
+
+5. Example Observations
+MSVC Compiled Binary:
+
+May show a more segmented structure reflecting Windows calling conventions.
+
+Might use specific compiler intrinsics for certain operations.
+
+The decompiled code could include additional annotations from the map file if symbols were preserved.
+
+GCC Compiled Binary:
+
+Often shows a flatter structure with more inlining of functions when using -Os.
+
+Might display different optimizations in control flow and loop structures.
+
+Variable names and intermediate computations can appear more streamlined or obfuscated, depending on optimization.
+
+Summary
+Using Ghidra, you can import and analyze both binaries. By decompiling functions and comparing the generated pseudo-C code, you’ll notice differences in how MSVC and GCC compile your source. These differences may include:
+
+Variations in control flow representation and inlining decisions.
+
+Differences in symbol and variable naming due to compiler-specific optimizations.
+
+Different layouts of function prologues/epilogues reflecting platform calling conventions.
+
+This process helps you understand how each compiler optimizes your code and can be useful for debugging, reverse engineering, or further optimization work.
+
+If you need more details or run into any specific issues while comparing the outputs, feel free to ask!
