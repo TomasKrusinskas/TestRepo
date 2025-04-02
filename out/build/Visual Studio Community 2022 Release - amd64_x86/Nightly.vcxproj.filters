@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\Tomas\Desktop\c++\CalculatorV2\out\build\Visual Studio Community 2022 Release - amd64_x86\CMakeFiles\4aab9a7f1a48234d8bc927ad85dbfecd\Nightly.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\Tomas\Desktop\c++\CalculatorV2\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\Tomas\Desktop\c++\CalculatorV2\out\build\Visual Studio Community 2022 Release - amd64_x86\CMakeFiles\Nightly" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{DEA081C0-8A97-30D1-AE73-95E1B11CE75B}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
